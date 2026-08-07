@@ -1,0 +1,10 @@
+{
+  "name": "surapid-elevator-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "SURAPID Elevator KZ official distributor website",
+  "devDependencies": {
+    "puppeteer": "^25.5.0"
+  }
+}

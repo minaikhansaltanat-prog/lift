@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5" />
+<title>SURAPID Elevator — официальный дистрибьютор лифтов в Казахстане</title>
+<meta name="description" content="SURAPID Elevator — официальный дистрибьютор лифтов, эскалаторов и траволаторов в Казахстане. Поставка, монтаж, модернизация и сервис. Алматы." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230C2038'/%3E%3Cpath d='M22 40 L32 26 L42 40' stroke='%23FF6A1A' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M22 46 L32 32 L42 46' stroke='%23ffffff' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round' opacity='0.55'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: {
+            950: '#0A1B2E',
+            900: '#0C2038',
+            800: '#123457',
+            700: '#1B4977',
+            600: '#25608F',
+          },
+          accent: {
+            DEFAULT: '#FF6A1A',
+            light: '#FF8F4D',
+            dark: '#E0550C',
+          },
+          metal: {
+            50: '#F7F8FA',
+            100: '#F0F2F5',
+            200: '#E4E8EC',
+            300: '#CDD4DC',
+            400: '#A9B3BF',
+            500: '#7C8798',
+            600: '#5B6577',
+            700: '#3F4756',
+          },
+          brass: '#B08D57',
+          wa: '#25D366',
+        },
+        fontFamily: {
+          display: ['Unbounded', 'sans-serif'],
+          body: ['Golos Text', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  :root {
+    --header-h: 84px;
+  }
+  @media (max-width: 767px) {
+    :root { --header-h: 68px; }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    background: #FBFBFC;
+  }
+  body {
+    font-family: 'Golos Text', sans-serif;
+    color: #16202C;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    padding-top: var(--header-h);
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Unbounded', sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+  }
+  section { overflow-x: clip; }
+  img { max-width: 100%; height: auto; display: block; }
+
+  ::selection { background: #FF6A1A; color: #fff; }
+
+  a, button { cursor: pointer; }
+  button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+    outline: 2px solid #FF6A1A;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  /* ---- noise texture ---- */
+  .noise::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: .05;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  /* ---- layered shadows ---- */
+  .shadow-elev-1 { box-shadow: 0 1px 2px rgba(10,27,46,.06), 0 2px 8px rgba(10,27,46,.06); }
+  .shadow-elev-2 { box-shadow: 0 8px 24px rgba(10,27,46,.10), 0 2px 6px rgba(10,27,46,.06); }
+  .shadow-elev-3 { box-shadow: 0 24px 60px rgba(10,27,46,.20), 0 8px 20px rgba(10,27,46,.10); }
+  .shadow-accent { box-shadow: 0 10px 30px rgba(255,106,26,.35); }
+
+  /* ---- header / mobile menu ---- */
+  #site-header { height: var(--header-h); }
+
+  .burger { width: 26px; height: 18px; position: relative; }
+  .burger span {
+    position: absolute; left: 0; width: 100%; height: 2px; border-radius: 2px;
+    background: currentColor;
+    transition: transform .32s cubic-bezier(.5,-0.3,.3,1.4), opacity .2s ease, top .32s cubic-bezier(.5,-0.3,.3,1.4);
+  }
+  .burger span:nth-child(1) { top: 0; }
+  .burger span:nth-child(2) { top: 8px; }
+  .burger span:nth-child(3) { top: 16px; }
+  .menu-open .burger span:nth-child(1) { top: 8px; transform: rotate(45deg); }
+  .menu-open .burger span:nth-child(2) { opacity: 0; }
+  .menu-open .burger span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
+
+  #mobile-panel {
+    position: fixed; inset: var(--header-h) 0 0 0;
+    transform: translateX(100%);
+    transition: transform .38s cubic-bezier(.16,1,.3,1);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .menu-open-state #mobile-panel { transform: translateX(0); }
+  html.no-scroll, body.no-scroll { overflow: hidden !important; height: 100%; }
+
+  /* ---- carousels ---- */
+  .carousel-viewport { overflow: hidden; touch-action: pan-y; cursor: grab; -webkit-user-select: none; user-select: none; }
+  .carousel-viewport:active { cursor: grabbing; }
+  .carousel-track { display: flex; will-change: transform; }
+  .carousel-track img { -webkit-user-drag: none; user-select: none; pointer-events: none; }
+
+  /* ---- floating action buttons ---- */
+  .fab-ring { position: absolute; inset: -6px; border-radius: 999px; }
+  @keyframes pulseRing {
+    0% { transform: scale(.85); opacity: .55; }
+    70% { transform: scale(1.55); opacity: 0; }
+    100% { transform: scale(1.55); opacity: 0; }
+  }
+  .fab-ring span {
+    position: absolute; inset: 0; border-radius: 999px;
+    border: 2px solid currentColor;
+    animation: pulseRing 2.4s cubic-bezier(.2,.6,.3,1) infinite;
+  }
+  .fab-ring span:nth-child(2) { animation-delay: .8s; }
+  .fab-ring span:nth-child(3) { animation-delay: 1.6s; }
+
+  @keyframes floaty { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-6px);} }
+  .fab-float { animation: floaty 3.2s ease-in-out infinite; }
+
+  /* ---- reveal-on-scroll ---- */
+  [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+  [data-reveal].in-view { opacity: 1; transform: translateY(0); }
+
+  /* ---- counter ---- */
+  .counter { font-variant-numeric: tabular-nums; }
+
+  /* ---- chat widget ---- */
+  #ai-panel { transition: opacity .28s ease, transform .28s cubic-bezier(.16,1,.3,1); }
+  .chat-bubble-in { animation: chatIn .32s cubic-bezier(.16,1,.3,1); }
+  @keyframes chatIn { from { opacity:0; transform: translateY(6px) scale(.98);} to { opacity:1; transform: translateY(0) scale(1);} }
+  .typing-dot { animation: typingBounce 1.1s infinite ease-in-out; }
+  .typing-dot:nth-child(2) { animation-delay: .15s; }
+  .typing-dot:nth-child(3) { animation-delay: .3s; }
+  @keyframes typingBounce { 0%,60%,100% { transform: translateY(0); opacity:.4; } 30% { transform: translateY(-4px); opacity:1; } }
+
+  /* scrollbar for chat / modal */
+  .thin-scroll::-webkit-scrollbar { width: 6px; }
+  .thin-scroll::-webkit-scrollbar-thumb { background: #CDD4DC; border-radius: 999px; }
+
+  /* ---- product modal ---- */
+  #product-modal { transition: opacity .3s ease; }
+  #product-modal .modal-card { transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .35s ease; }
+
+  .spec-row:nth-child(even) { background: #F5F6F8; }
+
+  .bg-radials {
+    background:
+      radial-gradient(1100px 550px at 85% -10%, rgba(255,106,26,.18), transparent 60%),
+      radial-gradient(900px 500px at 10% 0%, rgba(37,96,143,.35), transparent 55%),
+      linear-gradient(180deg, #0A1B2E 0%, #0C2038 55%, #0A1B2E 100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  }
+
+  .lang-kz { font-feature-settings: "kern" 1; }
+</style>
+</head>
+
+<body class="font-body antialiased bg-[#FBFBFC]">
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-navy-950/95 backdrop-blur border-b border-white/10">
+  <div class="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
+
+    <a href="#home" class="flex items-center gap-2.5 shrink-0 group" aria-label="SURAPID Elevator">
+      <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center shadow-accent shrink-0">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-7 6 7"/></svg>
+      </span>
+      <span class="leading-none">
+        <span class="block font-display font-extrabold text-white text-[17px] sm:text-lg tracking-tight">SURAPID</span>
+        <span class="block text-[9px] sm:text-[10px] tracking-[0.28em] text-metal-400 font-semibold mt-0.5">ELEVATOR · KAZAKHSTAN</span>
+      </span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-7 text-[14.5px] font-medium text-metal-200">
+      <a href="#about" class="hover:text-white transition-colors duration-200" data-i18n="nav.about">О компании</a>
+      <a href="#products" class="hover:text-white transition-colors duration-200" data-i18n="nav.products">Продукция</a>
+      <a href="#services" class="hover:text-white transition-colors duration-200" data-i18n="nav.services">Услуги</a>
+      <a href="#gallery" class="hover:text-white transition-colors duration-200" data-i18n="nav.gallery">Галерея</a>
+      <a href="#reviews" class="hover:text-white transition-colors duration-200" data-i18n="nav.reviews">Отзывы</a>
+      <a href="#contact" class="hover:text-white transition-colors duration-200" data-i18n="nav.contact">Контакты</a>
+    </nav>
+
+    <div class="hidden lg:flex items-center gap-3 shrink-0">
+      <a href="tel:+77080308888" class="text-white text-[14.5px] font-semibold hover:text-accent-light transition-colors duration-200">+7 708 030 8888</a>
+      <button type="button" data-lang-toggle class="text-[13px] font-bold tracking-wide text-white border border-white/25 rounded-full px-3 py-1.5 hover:border-accent hover:text-accent-light transition-colors duration-200" aria-label="Тілді ауыстыру / Переключить язык">
+        <span data-lang-label>ҚАЗ</span>
+      </button>
+      <a href="#contact" class="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white text-[14px] font-bold px-5 py-2.5 rounded-full shadow-accent transition-colors duration-200" data-i18n="nav.cta">
+        Баға сұрату
+      </a>
+    </div>
+
+    <div class="flex lg:hidden items-center gap-2">
+      <button type="button" data-lang-toggle class="text-[12.5px] font-bold tracking-wide text-white border border-white/25 rounded-full px-2.5 py-1.5" aria-label="Тілді ауыстыру / Переключить язык">
+        <span data-lang-label>ҚАЗ</span>
+      </button>
+      <button type="button" id="burger-btn" class="text-white p-2 -mr-2" aria-label="Мәзір / Меню" aria-expanded="false" aria-controls="mobile-panel">
+        <span class="burger block"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- =========================================================
+     MOBILE MENU PANEL
+========================================================= -->
+<div id="mobile-panel" class="lg:hidden fixed z-40 bg-navy-950 w-full">
+  <nav class="flex flex-col px-6 py-8 gap-1 text-white text-[19px] font-display font-semibold">
+    <a href="#about" class="mobile-link py-3.5 border-b border-white/10 flex items-center justify-between" data-i18n="nav.about">О компании</a>
+    <a href="#products" class="mobile-link py-3.5 border-b border-white/10 flex items-center justify-between" data-i18n="nav.products">Продукция</a>
+    <a href="#services" class="mobile-link py-3.5 border-b border-white/10 flex items-center justify-between" data-i18n="nav.services">Услуги</a>
+    <a href="#gallery" class="mobile-link py-3.5 border-b border-white/10 flex items-center justify-between" data-i18n="nav.gallery">Галерея</a>
+    <a href="#reviews" class="mobile-link py-3.5 border-b border-white/10 flex items-center justify-between" data-i18n="nav.reviews">Отзывы</a>
+    <a href="#contact" class="mobile-link py-3.5 border-b border-white/10 flex items-center justify-between" data-i18n="nav.contact">Контакты</a>
+  </nav>
+  <div class="px-6 pb-10 pt-2 flex flex-col gap-4">
+    <a href="tel:+77080308888" class="flex items-center gap-3 text-white font-semibold text-[16px]">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      +7 708 030 8888
+    </a>
+    <a href="https://wa.me/77080308888" target="_blank" rel="noopener" class="flex items-center gap-3 text-white font-semibold text-[16px]">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-wa shrink-0"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.46 17.5 2 12.04 2zm0 18.13a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.53 3.69-8.22 8.23-8.22 4.53 0 8.22 3.69 8.22 8.22 0 4.53-3.69 8.22-8.24 8.22zm4.51-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.36-.77-1.86-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.06 0 1.22.88 2.4 1 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+      WhatsApp
+    </a>
+    <a href="#contact" class="mt-2 inline-flex items-center justify-center gap-2 bg-accent text-white text-[15px] font-bold px-5 py-3.5 rounded-full shadow-accent" data-i18n="nav.cta">
+      Баға сұрату
+    </a>
+  </div>
+</div>
+<div id="mobile-backdrop" class="lg:hidden fixed inset-0 bg-navy-950/60 z-30 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+<section id="home" class="relative min-h-[92vh] flex items-end bg-navy-950">
+  <div class="absolute inset-0">
+    <img src="Photo/473589255_1682244045661486_3343171196765757075_n.jpg" alt="SURAPID панорамалық лифт шахтасы" class="w-full h-full object-cover opacity-55" />
+    <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/75 to-navy-950/25"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-navy-950/90 via-navy-950/25 to-transparent"></div>
+  </div>
+  <div class="absolute inset-0 noise"></div>
+
+  <!-- Video placeholder: replace this block with a <video autoplay muted loop playsinline> or YouTube <iframe> hero background when footage is ready -->
+  <div id="hero-video-slot" class="hidden"></div>
+
+  <div class="relative max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 pt-40">
+    <div data-reveal class="inline-flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur rounded-full px-4 py-1.5 mb-6">
+      <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+      <span class="text-[12px] sm:text-[13px] font-bold tracking-[0.14em] text-white/90" data-i18n="hero.kicker">SURAPID ELEVATOR — ҚАЗАҚСТАН</span>
+    </div>
+    <h1 data-reveal class="font-display font-extrabold text-white text-[34px] leading-[1.12] sm:text-5xl lg:text-[62px] max-w-4xl" data-i18n="hero.title">
+      Қытайдың Top-500 өндірушісінен — Қазақстандағы ресми лифт дистрибьюторы
+    </h1>
+    <p data-reveal class="mt-5 sm:mt-6 text-metal-200 text-[15.5px] sm:text-lg max-w-2xl" data-i18n="hero.subtitle">
+      38 жылдық тәжірибе, меншікті өндіріс, 60 000+ орнатылған лифт әлем бойынша. Алматыдағы ресми өкілдік — жеткізу, монтаж, сервис.
+    </p>
+    <div data-reveal class="mt-8 flex flex-wrap items-center gap-3.5">
+      <a href="#contact" class="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-bold text-[15px] px-6 py-3.5 rounded-full shadow-accent transition-all duration-200 hover:-translate-y-0.5" data-i18n="hero.cta1">
+        Баға сұрату
+      </a>
+      <a href="https://wa.me/77080308888" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/15 border border-white/25 text-white font-bold text-[15px] px-6 py-3.5 rounded-full backdrop-blur transition-all duration-200 hover:-translate-y-0.5">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-wa"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.46 17.5 2 12.04 2zm0 18.13a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.53 3.69-8.22 8.23-8.22 4.53 0 8.22 3.69 8.22 8.22 0 4.53-3.69 8.22-8.24 8.22z"/></svg>
+        <span data-i18n="hero.cta2">WhatsApp-қа жазу</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     STATS STRIP
+========================================================= -->
+<section class="relative bg-navy-900 border-t border-white/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-9 sm:py-12">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center lg:text-left">
+      <div data-reveal>
+        <div class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white"><span class="counter" data-count="38">0</span></div>
+        <div class="mt-1.5 text-[12.5px] sm:text-[13.5px] text-metal-400 font-medium" data-i18n="stats.years">жыл тәжірибе</div>
+      </div>
+      <div data-reveal>
+        <div class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white"><span class="counter" data-count="60000">0</span>+</div>
+        <div class="mt-1.5 text-[12.5px] sm:text-[13.5px] text-metal-400 font-medium" data-i18n="stats.units">орнатылған лифт</div>
+      </div>
+      <div data-reveal>
+        <div class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white"><span class="counter" data-count="300">0</span>+</div>
+        <div class="mt-1.5 text-[12.5px] sm:text-[13.5px] text-metal-400 font-medium" data-i18n="stats.engineers">инженер</div>
+      </div>
+      <div data-reveal>
+        <div class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white"><span class="counter" data-count="4">0</span></div>
+        <div class="mt-1.5 text-[12.5px] sm:text-[13.5px] text-metal-400 font-medium" data-i18n="stats.factories">зауыт</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     USP / TRUST SECTION
+========================================================= -->
+<section id="about" class="relative bg-[#FBFBFC] py-16 sm:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <span data-reveal class="text-accent-dark font-bold text-[13px] tracking-[0.16em] uppercase" data-i18n="usp.kicker">Неге SURAPID</span>
+      <h2 data-reveal class="mt-3 font-display font-bold text-[28px] sm:text-4xl text-navy-950" data-i18n="usp.title">Инженерлік мәдениет пен сенімділіктің 38 жылы</h2>
+      <p data-reveal class="mt-4 text-metal-600 text-[15.5px]" data-i18n="usp.subtitle">New Xi'ao Elevator Group құрамындағы SURAPID — Қытайдың ірі, толық циклді лифт өндірушісі. Қазақстанда — ресми дистрибьютор ретінде жұмыс істейміз.</p>
+    </div>
+
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- card 1 -->
+      <div data-reveal class="group bg-white rounded-3xl p-7 border border-metal-200 shadow-elev-1 hover:shadow-elev-2 transition-shadow duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-navy-950 flex items-center justify-center mb-5 group-hover:bg-accent transition-colors duration-300">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6.5 1-4.7 4.6L18 20l-6-3.4L6 20l1.2-6.4L2.5 9l6.5-1z"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-[17px] text-navy-950" data-i18n="usp.c1.title">Top-500 Қытай компаниясы</h3>
+        <p class="mt-2.5 text-[14px] text-metal-600" data-i18n="usp.c1.text">New Xi'ao Elevator Group құрамында — елдегі №1 интеграцияланған лифт тобы.</p>
+      </div>
+      <!-- card 2 -->
+      <div data-reveal class="group bg-white rounded-3xl p-7 border border-metal-200 shadow-elev-1 hover:shadow-elev-2 transition-shadow duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-navy-950 flex items-center justify-center mb-5 group-hover:bg-accent transition-colors duration-300">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M6.5 21v-2a5 5 0 0 1 5-5h1a5 5 0 0 1 5 5v2"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-[17px] text-navy-950" data-i18n="usp.c2.title">OTIS-пен тарихи байланыс</h3>
+        <p class="mt-2.5 text-[14px] text-metal-600" data-i18n="usp.c2.text">1997 жылы Ханчжоуда OTIS-пен бірлескен кәсіпорын (XIZI OTIS) құрылған.</p>
+      </div>
+      <!-- card 3 -->
+      <div data-reveal class="group bg-white rounded-3xl p-7 border border-metal-200 shadow-elev-1 hover:shadow-elev-2 transition-shadow duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-navy-950 flex items-center justify-center mb-5 group-hover:bg-accent transition-colors duration-300">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-[17px] text-navy-950" data-i18n="usp.c3.title">Толық циклді меншікті өндіріс</h3>
+        <p class="mt-2.5 text-[14px] text-metal-600" data-i18n="usp.c3.text">Тарту машинасы, басқару жүйесі, есік приводы — бәрі өз зауыттарында жасалады.</p>
+      </div>
+      <!-- card 4 -->
+      <div data-reveal class="group bg-white rounded-3xl p-7 border border-metal-200 shadow-elev-1 hover:shadow-elev-2 transition-shadow duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-navy-950 flex items-center justify-center mb-5 group-hover:bg-accent transition-colors duration-300">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.5 1 1.3 1 2.1V16h6v-.4c0-.8.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-[17px] text-navy-950" data-i18n="usp.c4.title">Ауқымды R&D базасы</h3>
+        <p class="mt-2.5 text-[14px] text-metal-600" data-i18n="usp.c4.text">300+ инженер, 60+ патент, 208 метрлік сынақ мұнарасы, жетекші университеттермен серіктестік.</p>
+      </div>
+      <!-- card 5 -->
+      <div data-reveal class="group bg-white rounded-3xl p-7 border border-metal-200 shadow-elev-1 hover:shadow-elev-2 transition-shadow duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-navy-950 flex items-center justify-center mb-5 group-hover:bg-accent transition-colors duration-300">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-8h6v8"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-[17px] text-navy-950" data-i18n="usp.c5.title">4 зауыт, 430 000+ м²</h3>
+        <p class="mt-2.5 text-[14px] text-metal-600" data-i18n="usp.c5.text">Жылына 100 000+ бірлік қуат — жеткізу тұрақтылығының кепілі.</p>
+      </div>
+      <!-- card 6 -->
+      <div data-reveal class="group bg-white rounded-3xl p-7 border border-metal-200 shadow-elev-1 hover:shadow-elev-2 transition-shadow duration-300">
+        <div class="w-12 h-12 rounded-2xl bg-navy-950 flex items-center justify-center mb-5 group-hover:bg-accent transition-colors duration-300">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-[17px] text-navy-950" data-i18n="usp.c6.title">60 000+ орнатылған лифт</h3>
+        <p class="mt-2.5 text-[14px] text-metal-600" data-i18n="usp.c6.text">Әлем бойынша тәжірибенің масштабы — сенімді таңдау.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     PRODUCTS
+========================================================= -->
+<section id="products" class="relative bg-navy-950 py-16 sm:py-24 noise">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-2xl">
+        <span data-reveal class="text-accent font-bold text-[13px] tracking-[0.16em] uppercase" data-i18n="products.kicker">Өнім каталогы</span>
+        <h2 data-reveal class="mt-3 font-display font-bold text-[28px] sm:text-4xl text-white" data-i18n="products.title">Әр объектіге лайықталған шешім</h2>
+      </div>
+      <p data-reveal class="text-metal-400 text-[14.5px] max-w-sm" data-i18n="products.subtitle">Пассажирлік, панорамалық, коттедждік лифттерден бастап эскалатор мен компоненттерге дейін.</p>
+    </div>
+
+    <div id="product-grid" class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     WHY US
+========================================================= -->
+<section class="relative bg-[#FBFBFC] py-16 sm:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div>
+        <span data-reveal class="text-accent-dark font-bold text-[13px] tracking-[0.16em] uppercase" data-i18n="why.kicker">Жергілікті дистрибьютор</span>
+        <h2 data-reveal class="mt-3 font-display font-bold text-[28px] sm:text-4xl text-navy-950" data-i18n="why.title">Неге тапсырысты бізден жасайды</h2>
+        <p data-reveal class="mt-4 text-metal-600 text-[15.5px]" data-i18n="why.subtitle">Алматыдағы ресми өкілдік — зауыттың сапасы мен жергілікті сервистің жылдамдығын біріктіреді.</p>
+
+        <div class="mt-9 space-y-5">
+          <div data-reveal class="flex gap-4">
+            <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3.5V16h-7z"/><circle cx="5.5" cy="18.5" r="1.9"/><circle cx="18.5" cy="18.5" r="1.9"/></svg>
+            </div>
+            <div>
+              <h3 class="font-display font-semibold text-[16px] text-navy-950" data-i18n="why.c1.title">Жедел жеткізу</h3>
+              <p class="mt-1 text-[14px] text-metal-600" data-i18n="why.c1.text">4 зауыттан тікелей жеткізу және Алматыдағы қойма — мерзімді қысқартады.</p>
+            </div>
+          </div>
+          <div data-reveal class="flex gap-4">
+            <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-display font-semibold text-[16px] text-navy-950" data-i18n="why.c2.title">ҚР-дағы сервис қолдауы</h3>
+              <p class="mt-1 text-[14px] text-metal-600" data-i18n="why.c2.text">Монтаж, техникалық қызмет көрсету және апаттық шығу — жергілікті команда.</p>
+            </div>
+          </div>
+          <div data-reveal class="flex gap-4">
+            <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-display font-semibold text-[16px] text-navy-950" data-i18n="why.c3.title">Орысша және қазақша қолдау</h3>
+              <p class="mt-1 text-[14px] text-metal-600" data-i18n="why.c3.text">Техникалық құжаттама мен консультация екі тілде де беріледі.</p>
+            </div>
+          </div>
+          <div data-reveal class="flex gap-4">
+            <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 12v5M9.5 14.5h5"/></svg>
+            </div>
+            <div>
+              <h3 class="font-display font-semibold text-[16px] text-navy-950" data-i18n="why.c4.title">Қосалқы бөлшектер қоймасы</h3>
+              <p class="mt-1 text-[14px] text-metal-600" data-i18n="why.c4.text">Түпнұсқа компоненттер жеткізудегі үзілістерсіз қолжетімді.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal class="relative">
+        <!-- Video placeholder: this photo can be swapped for a <video autoplay muted loop playsinline> or YouTube factory-tour embed once footage is available -->
+        <div class="rounded-[28px] overflow-hidden shadow-elev-3 aspect-[4/5]">
+          <img src="Photo/473573417_1682244035661487_3410547325526362133_n.jpg" alt="SURAPID лифт кабинасының премиум интерьері" class="w-full h-full object-cover" />
+        </div>
+        <div class="absolute -bottom-6 -left-6 sm:-left-10 bg-white rounded-2xl shadow-elev-3 p-5 max-w-[220px] border border-metal-200">
+          <div class="flex items-center gap-1 text-accent">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 6.5 1-4.7 4.6L18 20l-6-3.4L6 20l1.2-6.4L2.5 9l6.5-1z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 6.5 1-4.7 4.6L18 20l-6-3.4L6 20l1.2-6.4L2.5 9l6.5-1z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 6.5 1-4.7 4.6L18 20l-6-3.4L6 20l1.2-6.4L2.5 9l6.5-1z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 6.5 1-4.7 4.6L18 20l-6-3.4L6 20l1.2-6.4L2.5 9l6.5-1z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 6.5 1-4.7 4.6L18 20l-6-3.4L6 20l1.2-6.4L2.5 9l6.5-1z"/></svg>
+          </div>
+          <p class="mt-2 text-[13px] text-navy-950 font-semibold" data-i18n="why.badge">Кабина дизайнының 20+ нұсқасы</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SERVICES
+========================================================= -->
+<section id="services" class="relative bg-metal-100 py-16 sm:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <span data-reveal class="text-accent-dark font-bold text-[13px] tracking-[0.16em] uppercase" data-i18n="services.kicker">Қызметтер</span>
+      <h2 data-reveal class="mt-3 font-display font-bold text-[28px] sm:text-4xl text-navy-950" data-i18n="services.title">Жеткізуден кепілдікке дейін толық цикл</h2>
+    </div>
+
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div data-reveal class="bg-white rounded-3xl p-7 border border-metal-200 shadow-elev-1 hover:-translate-y-1 hover:shadow-elev-2 transition-all duration-300">
+        <span class="text-[12px] font-bold text-accent-dark">01</span>
+        <h3 class="mt-3 font-display font-semibold text-[17px] text-navy-950" data-i18n="services.c1.title">Жеткізу және монтаж</h3>
+        <p class="mt-2.5 text-[14px] text-metal-600" data-i18n="services.c1.text">Зауыттан объектіге дейін толық логистика және білікті монтаж командасы.</p>
+      </div>
+      <div data-reveal class="bg-white rounded-3xl p-7 border border-metal-200 shadow-elev-1 hover:-translate-y-1 hover:shadow-elev-2 transition-all duration-300">
+        <span class="text-[12px] font-bold text-accent-dark">02</span>
+        <h3 class="mt-3 font-display font-semibold text-[17px] text-navy-950" data-i18n="services.c2.title">Модернизация</h3>
+        <p class="mt-2.5 text-[14px] text-metal-600" data-i18n="services.c2.text">Ескі лифтті қауіпсіздік пен эстетика талаптарына сай жаңарту.</p>
+      </div>
+      <div data-reveal class="bg-white rounded-3xl p-7 border border-metal-200 shadow-elev-1 hover:-translate-y-1 hover:shadow-elev-2 transition-all duration-300">
+        <span class="text-[12px] font-bold text-accent-dark">03</span>
+        <h3 class="mt-3 font-display font-semibold text-[17px] text-navy-950" data-i18n="services.c3.title">Сервистік қызмет көрсету</h3>
+        <p class="mt-2.5 text-[14px] text-metal-600" data-i18n="services.c3.text">Жоспарлы қызмет көрсету, апаттық шығу және түпнұсқа қосалқы бөлшектер.</p>
+      </div>
+      <div data-reveal class="bg-white rounded-3xl p-7 border border-metal-200 shadow-elev-1 hover:-translate-y-1 hover:shadow-elev-2 transition-all duration-300">
+        <span class="text-[12px] font-bold text-accent-dark">04</span>
+        <h3 class="mt-3 font-display font-semibold text-[17px] text-navy-950" data-i18n="services.c4.title">Кепілдік шарттары</h3>
+        <p class="mt-2.5 text-[14px] text-metal-600" data-i18n="services.c4.text">Ресми дистрибьютор кепілдігі және зауыттық қолдау.</p>
+      </div>
+    </div>
+
+    <!-- process steps (modernization) -->
+    <div data-reveal class="mt-14 bg-navy-950 rounded-[28px] p-7 sm:p-10 relative overflow-hidden noise">
+      <h3 class="font-display font-semibold text-white text-[19px] sm:text-[22px] relative" data-i18n="services.process.title">Модернизация процесі</h3>
+      <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 relative">
+        <div class="text-white">
+          <div class="w-9 h-9 rounded-full bg-accent flex items-center justify-center font-display font-bold text-[13px]">1</div>
+          <p class="mt-3 text-[13px] text-metal-300" data-i18n="services.process.s1">Аудит</p>
+        </div>
+        <div class="text-white">
+          <div class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center font-display font-bold text-[13px]">2</div>
+          <p class="mt-3 text-[13px] text-metal-300" data-i18n="services.process.s2">Жоба</p>
+        </div>
+        <div class="text-white">
+          <div class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center font-display font-bold text-[13px]">3</div>
+          <p class="mt-3 text-[13px] text-metal-300" data-i18n="services.process.s3">Демонтаж</p>
+        </div>
+        <div class="text-white">
+          <div class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center font-display font-bold text-[13px]">4</div>
+          <p class="mt-3 text-[13px] text-metal-300" data-i18n="services.process.s4">Орнату</p>
+        </div>
+        <div class="text-white">
+          <div class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center font-display font-bold text-[13px]">5</div>
+          <p class="mt-3 text-[13px] text-metal-300" data-i18n="services.process.s5">Тестілеу</p>
+        </div>
+        <div class="text-white">
+          <div class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center font-display font-bold text-[13px]">6</div>
+          <p class="mt-3 text-[13px] text-metal-300" data-i18n="services.process.s6">Кепілдік</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     GALLERY CAROUSEL (infinite)
+========================================================= -->
+<section id="gallery" class="relative bg-[#FBFBFC] py-16 sm:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <span data-reveal class="text-accent-dark font-bold text-[13px] tracking-[0.16em] uppercase" data-i18n="gallery.kicker">Галерея</span>
+        <h2 data-reveal class="mt-3 font-display font-bold text-[28px] sm:text-4xl text-navy-950" data-i18n="gallery.title">Өндіріс, көрме залы және кабина дизайндары</h2>
+      </div>
+      <div class="hidden sm:flex items-center gap-2.5">
+        <button type="button" class="carousel-arrow w-11 h-11 rounded-full border border-metal-300 flex items-center justify-center hover:bg-navy-950 hover:text-white hover:border-navy-950 transition-colors duration-200" data-target="gallery-track" data-dir="-1" aria-label="Артқа">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="carousel-arrow w-11 h-11 rounded-full border border-metal-300 flex items-center justify-center hover:bg-navy-950 hover:text-white hover:border-navy-950 transition-colors duration-200" data-target="gallery-track" data-dir="1" aria-label="Алға">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-10 carousel-viewport" id="gallery-viewport">
+    <div class="carousel-track gap-4 px-4 sm:px-6 lg:px-8" id="gallery-track"></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     REVIEWS CAROUSEL (infinite)
+========================================================= -->
+<section id="reviews" class="relative bg-navy-950 py-16 sm:py-24 noise">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <span data-reveal class="text-accent font-bold text-[13px] tracking-[0.16em] uppercase" data-i18n="reviews.kicker">Пікірлер</span>
+        <h2 data-reveal class="mt-3 font-display font-bold text-[28px] sm:text-4xl text-white" data-i18n="reviews.title">Серіктестер бізге не дейді</h2>
+      </div>
+      <div class="hidden sm:flex items-center gap-2.5">
+        <button type="button" class="carousel-arrow w-11 h-11 rounded-full border border-white/25 text-white flex items-center justify-center hover:bg-accent hover:border-accent transition-colors duration-200" data-target="reviews-track" data-dir="-1" aria-label="Артқа">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="carousel-arrow w-11 h-11 rounded-full border border-white/25 text-white flex items-center justify-center hover:bg-accent hover:border-accent transition-colors duration-200" data-target="reviews-track" data-dir="1" aria-label="Алға">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-10 carousel-viewport" id="reviews-viewport">
+    <div class="carousel-track gap-5 px-4 sm:px-6 lg:px-8" id="reviews-track"></div>
+  </div>
+  <p class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 text-metal-500 text-[12px]" data-i18n="reviews.disclaimer">* Пікірлер — жоба демонстрациясы үшін дайындалған мысал. Нақты клиент пікірлерімен ауыстырылады.</p>
+</section>
+
+<!-- =========================================================
+     CONTACT / RFQ
+========================================================= -->
+<section id="contact" class="relative bg-metal-100 py-16 sm:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-10 lg:gap-14">
+
+      <div class="lg:col-span-2">
+        <span data-reveal class="text-accent-dark font-bold text-[13px] tracking-[0.16em] uppercase" data-i18n="contact.kicker">Байланыс</span>
+        <h2 data-reveal class="mt-3 font-display font-bold text-[28px] sm:text-4xl text-navy-950" data-i18n="contact.title">Жобаңызға баға есептейік</h2>
+        <p data-reveal class="mt-4 text-metal-600 text-[15px]" data-i18n="contact.subtitle">Форманы толтырыңыз немесе тікелей WhatsApp/телефон арқылы хабарласыңыз — 1 жұмыс күні ішінде жауап береміз.</p>
+
+        <div class="mt-8 space-y-5">
+          <div data-reveal class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-white border border-metal-200 flex items-center justify-center shrink-0 shadow-elev-1">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0C2038" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <p class="font-semibold text-navy-950 text-[15px]" data-i18n="contact.office">Алматы қ., ресми өкілдік офисі</p>
+              <p class="text-[13.5px] text-metal-500 mt-0.5" data-i18n="contact.officeNote">Нақты мекенжай — жеке сұрату бойынша</p>
+            </div>
+          </div>
+          <div data-reveal class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-white border border-metal-200 flex items-center justify-center shrink-0 shadow-elev-1">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0C2038" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <a href="tel:+77080308888" class="font-semibold text-navy-950 text-[15px] hover:text-accent-dark transition-colors">+7 708 030 8888</a>
+              <p class="text-[13.5px] text-metal-500 mt-0.5" data-i18n="contact.phoneWa">Телефон және WhatsApp</p>
+            </div>
+          </div>
+          <div data-reveal class="flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-white border border-metal-200 flex items-center justify-center shrink-0 shadow-elev-1">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0C2038" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+            </div>
+            <div>
+              <p class="font-semibold text-navy-950 text-[15px]" data-i18n="contact.hours">Дс–Жм: 09:00–18:00</p>
+              <p class="text-[13.5px] text-metal-500 mt-0.5" data-i18n="contact.hoursNote">Сенбі — келісім бойынша</p>
+            </div>
+          </div>
+        </div>
+
+        <div data-reveal class="mt-8 rounded-2xl overflow-hidden border border-metal-200 aspect-[16/10] bg-metal-200 relative">
+          <!-- Map placeholder: replace with Google Maps embed (Almaty office) once exact address is confirmed -->
+          <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-metal-500">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="text-[13px] font-medium" data-i18n="contact.mapPlaceholder">Google Maps — Алматы офисі</span>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal class="lg:col-span-3 bg-white rounded-[28px] p-6 sm:p-9 shadow-elev-2 border border-metal-200">
+        <form id="rfq-form" class="grid sm:grid-cols-2 gap-5" novalidate>
+          <div class="sm:col-span-2">
+            <label class="block text-[13.5px] font-semibold text-navy-950 mb-1.5" data-i18n="form.name">Аты-жөні *</label>
+            <input required type="text" name="name" class="w-full rounded-xl border border-metal-300 px-4 py-3 text-[14.5px] focus:border-accent outline-none transition-colors" data-i18n-placeholder="form.namePh" placeholder="Аты-жөніңіз" />
+          </div>
+          <div>
+            <label class="block text-[13.5px] font-semibold text-navy-950 mb-1.5" data-i18n="form.phone">Телефон *</label>
+            <input required type="tel" name="phone" class="w-full rounded-xl border border-metal-300 px-4 py-3 text-[14.5px] focus:border-accent outline-none transition-colors" placeholder="+7 (___) ___ __ __" />
+          </div>
+          <div>
+            <label class="block text-[13.5px] font-semibold text-navy-950 mb-1.5" data-i18n="form.company">Компания</label>
+            <input type="text" name="company" class="w-full rounded-xl border border-metal-300 px-4 py-3 text-[14.5px] focus:border-accent outline-none transition-colors" data-i18n-placeholder="form.companyPh" placeholder="Компания атауы" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-[13.5px] font-semibold text-navy-950 mb-1.5" data-i18n="form.type">Сұрақ түрі</label>
+            <select name="type" id="rfq-type" class="w-full rounded-xl border border-metal-300 px-4 py-3 text-[14.5px] focus:border-accent outline-none transition-colors bg-white">
+              <option data-i18n="form.type1">Сатып алу</option>
+              <option data-i18n="form.type2">Модернизация</option>
+              <option data-i18n="form.type3">Сервис / қосалқы бөлшек</option>
+              <option data-i18n="form.type4">Серіктестік</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-[13.5px] font-semibold text-navy-950 mb-1.5" data-i18n="form.message">Хабарлама</label>
+            <textarea name="message" rows="4" class="w-full rounded-xl border border-metal-300 px-4 py-3 text-[14.5px] focus:border-accent outline-none transition-colors resize-none" data-i18n-placeholder="form.messagePh" placeholder="Жобаңыз туралы қысқаша жазыңыз"></textarea>
+          </div>
+          <div class="sm:col-span-2 flex items-start gap-3">
+            <input required type="checkbox" id="consent" class="mt-1 w-4 h-4 accent-accent shrink-0" />
+            <label for="consent" class="text-[12.5px] text-metal-600" data-i18n="form.consent">Дербес деректерімді өңдеуге келісім беремін.</label>
+          </div>
+          <div class="sm:col-span-2">
+            <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-dark text-white font-bold text-[15px] px-8 py-3.5 rounded-full shadow-accent transition-all duration-200 hover:-translate-y-0.5" data-i18n="form.submit">
+              Сұранысты жіберу
+            </button>
+          </div>
+        </form>
+        <div id="rfq-success" class="hidden flex-col items-center text-center py-10 gap-4">
+          <div class="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FF6A1A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <h3 class="font-display font-semibold text-[19px] text-navy-950" data-i18n="form.successTitle">Рахмет! Сұранысыңыз қабылданды</h3>
+          <p class="text-metal-600 text-[14.5px] max-w-sm" data-i18n="form.successText">Менеджеріміз жақын арада хабарласады. Жедел байланыс үшін WhatsApp қолданыңыз.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+<footer class="bg-navy-950 pt-16 pb-8 relative noise">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div>
+        <a href="#home" class="flex items-center gap-2.5">
+          <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center shrink-0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-7 6 7"/></svg>
+          </span>
+          <span class="font-display font-extrabold text-white text-lg">SURAPID</span>
+        </a>
+        <p class="mt-4 text-[13.5px] text-metal-400 max-w-xs" data-i18n="footer.about">Қазақстандағы ресми лифт дистрибьюторы. Жеткізу, монтаж, модернизация және сервис.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-display font-semibold text-[14px] mb-4" data-i18n="footer.nav">Навигация</h4>
+        <ul class="space-y-2.5 text-[14px] text-metal-400">
+          <li><a href="#about" class="hover:text-white transition-colors" data-i18n="nav.about">О компании</a></li>
+          <li><a href="#products" class="hover:text-white transition-colors" data-i18n="nav.products">Продукция</a></li>
+          <li><a href="#services" class="hover:text-white transition-colors" data-i18n="nav.services">Услуги</a></li>
+          <li><a href="#gallery" class="hover:text-white transition-colors" data-i18n="nav.gallery">Галерея</a></li>
+          <li><a href="#reviews" class="hover:text-white transition-colors" data-i18n="nav.reviews">Отзывы</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-display font-semibold text-[14px] mb-4" data-i18n="footer.products">Өнімдер</h4>
+        <ul class="space-y-2.5 text-[14px] text-metal-400" id="footer-products"></ul>
+      </div>
+      <div>
+        <h4 class="text-white font-display font-semibold text-[14px] mb-4" data-i18n="nav.contact">Контакты</h4>
+        <ul class="space-y-3 text-[14px] text-metal-400">
+          <li><a href="tel:+77080308888" class="hover:text-white transition-colors">+7 708 030 8888</a></li>
+          <li><a href="https://wa.me/77080308888" target="_blank" rel="noopener" class="hover:text-white transition-colors">WhatsApp</a></li>
+          <li data-i18n="contact.office">Алматы қ., ресми өкілдік офисі</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-14 pt-7 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12.5px] text-metal-500">
+      <p data-i18n="footer.copyright">© 2026 SURAPID Elevator Kazakhstan. Барлық құқықтар қорғалған.</p>
+      <p data-i18n="footer.official">SURAPID / New Xi'ao Elevator Group ресми дистрибьюторы</p>
+    </div>
+  </div>
+</footer>
+
+<!-- =========================================================
+     PRODUCT MODAL
+========================================================= -->
+<div id="product-modal" class="fixed inset-0 z-[70] hidden opacity-0 items-center justify-center p-4">
+  <div id="product-modal-backdrop" class="absolute inset-0 bg-navy-950/70 backdrop-blur-sm"></div>
+  <div class="modal-card relative bg-white rounded-[26px] max-w-3xl w-full max-h-[88vh] overflow-y-auto thin-scroll shadow-elev-3 opacity-0 translate-y-4">
+    <button type="button" id="product-modal-close" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 backdrop-blur border border-metal-200 flex items-center justify-center hover:bg-navy-950 hover:text-white transition-colors" aria-label="Жабу">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div id="product-modal-img" class="aspect-[16/9] bg-metal-200"></div>
+    <div class="p-6 sm:p-8">
+      <h3 id="product-modal-title" class="font-display font-bold text-[24px] text-navy-950"></h3>
+      <p id="product-modal-desc" class="mt-3 text-metal-600 text-[15px]"></p>
+      <div id="product-modal-specs" class="mt-6 rounded-2xl overflow-hidden border border-metal-200"></div>
+      <a href="#contact" id="product-modal-cta" class="mt-7 inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-bold text-[14.5px] px-6 py-3.5 rounded-full shadow-accent transition-colors duration-200">
+        <span data-i18n="products.modalCta">Осы модель бойынша баға сұрату</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     FLOATING ACTION BUTTONS: AI Assistant + WhatsApp
+========================================================= -->
+<div class="fixed right-4 sm:right-6 bottom-5 sm:bottom-6 z-[60] flex flex-col items-end gap-3.5">
+
+  <!-- AI assistant chat panel -->
+  <div id="ai-panel" class="hidden opacity-0 translate-y-3 w-[calc(100vw-2rem)] max-w-[380px] h-[min(560px,70vh)] bg-white rounded-[24px] shadow-elev-3 border border-metal-200 flex flex-col overflow-hidden mb-1">
+    <div class="bg-navy-950 px-5 py-4 flex items-center gap-3 shrink-0 noise relative">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center relative shrink-0">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2M20 14h2M9 13v2M15 13v2"/></svg>
+        <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-wa border-2 border-navy-950"></span>
+      </div>
+      <div class="min-w-0 relative">
+        <p class="text-white font-display font-semibold text-[14.5px] leading-tight" data-i18n="ai.name">SURAPID AI-көмекші</p>
+        <p class="text-metal-400 text-[12px]" data-i18n="ai.status">Онлайн · сұрақтарыңызға жауап береді</p>
+      </div>
+      <button type="button" id="ai-close" class="ml-auto text-metal-400 hover:text-white transition-colors relative" aria-label="Жабу">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div id="ai-messages" class="flex-1 overflow-y-auto thin-scroll px-4 py-4 space-y-3 bg-metal-50"></div>
+
+    <div id="ai-suggestions" class="px-4 pb-2 flex flex-wrap gap-2 shrink-0"></div>
+
+    <form id="ai-form" class="p-3 border-t border-metal-200 flex items-center gap-2 shrink-0 bg-white">
+      <input id="ai-input" type="text" autocomplete="off" class="flex-1 min-w-0 rounded-full border border-metal-300 px-4 py-2.5 text-[14px] focus:border-accent outline-none transition-colors" data-i18n-placeholder="ai.placeholder" placeholder="Сұрағыңызды жазыңыз..." />
+      <button type="submit" class="w-10 h-10 rounded-full bg-accent hover:bg-accent-dark text-white flex items-center justify-center shrink-0 transition-colors" aria-label="Жіберу">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
+      </button>
+    </form>
+  </div>
+
+  <!-- AI assistant toggle button -->
+  <button type="button" id="ai-toggle" class="relative w-16 h-16 rounded-full bg-navy-950 shadow-elev-3 flex items-center justify-center text-white fab-float" aria-label="AI-көмекші">
+    <span class="fab-ring text-accent"><span></span><span></span><span></span></span>
+    <svg id="ai-icon-chat" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="relative"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2M20 14h2M9 13v2M15 13v2"/></svg>
+    <svg id="ai-icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="relative hidden"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+
+  <!-- WhatsApp button -->
+  <a href="https://wa.me/77080308888?text=%D0%A1%D3%99%D0%BB%D0%B5%D0%BC%D0%B5%D1%82%D1%81%D1%96%D0%B7%D0%B1%D0%B5%2C%20SURAPID%20Elevator" target="_blank" rel="noopener" class="relative w-16 h-16 rounded-full bg-wa shadow-elev-3 flex items-center justify-center text-white" aria-label="WhatsApp">
+    <span class="fab-ring text-wa"><span></span><span></span><span></span></span>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" class="relative"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.46 17.5 2 12.04 2zm0 18.13a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.53 3.69-8.22 8.23-8.22 4.53 0 8.22 3.69 8.22 8.22 0 4.53-3.69 8.22-8.24 8.22zm4.51-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.36-.77-1.86-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.06 0 1.22.88 2.4 1 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+  </a>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

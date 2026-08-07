@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Python build artifacts (unrelated design-tool scripts, not part of the site)
+__pycache__/
+*.pyc
+
+# QA screenshots (regenerate locally with screenshot.mjs)
+temporary screenshots/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Unused duplicate photo uploads
+Photo/* (1).jpg
