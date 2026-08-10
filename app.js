@@ -7,6 +7,7 @@
   const LANG_KEY = "surapid_lang";
   const LANGS = ["ru", "kz", "kg"];
   const LANG_LABEL = { ru: "РУС", kz: "ҚАЗ", kg: "КЫР" };
+  const LANG_NAME = { ru: "Русский", kz: "Қазақша", kg: "Кыргызча" };
   const LANG_HTML_TAG = { ru: "ru", kz: "kk", kg: "ky" };
   let currentLang = localStorage.getItem(LANG_KEY) || "ru";
   if (!LANGS.includes(currentLang)) currentLang = "ru";
@@ -35,9 +36,8 @@
     $$("[data-i18n-placeholder]").forEach((el) => {
       el.setAttribute("placeholder", t(el.getAttribute("data-i18n-placeholder"), lang));
     });
-    const nextLang = LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length];
     $$("[data-lang-label]").forEach((el) => {
-      el.textContent = LANG_LABEL[nextLang];
+      el.textContent = LANG_LABEL[lang];
     });
     document.documentElement.lang = LANG_HTML_TAG[lang] || "ru";
     document.documentElement.classList.toggle("lang-kz", lang === "kz");
@@ -53,16 +53,67 @@
     renderGallery(lang);
     renderReviews(lang);
     renderVideos(lang);
+    renderLangDropdowns();
     if (!(opts && opts.silent)) {
       resetAiChat(lang);
     }
   }
 
-  $$("[data-lang-toggle]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const next = LANGS[(LANGS.indexOf(currentLang) + 1) % LANGS.length];
-      setLanguage(next);
+  /* ---------------------------------------------------------
+     Language dropdown widgets (desktop + mobile)
+  --------------------------------------------------------- */
+  const langWidgets = $$("[data-lang-widget]");
+
+  function closeLangDropdowns() {
+    langWidgets.forEach((w) => {
+      const dropdown = $("[data-lang-dropdown]", w);
+      const toggle = $("[data-lang-toggle]", w);
+      const chevron = $("[data-lang-chevron]", w);
+      dropdown.classList.add("opacity-0", "scale-95", "-translate-y-1", "pointer-events-none");
+      toggle.setAttribute("aria-expanded", "false");
+      if (chevron) chevron.style.transform = "";
     });
+  }
+
+  function openLangDropdown(widget) {
+    closeLangDropdowns();
+    const dropdown = $("[data-lang-dropdown]", widget);
+    const toggle = $("[data-lang-toggle]", widget);
+    const chevron = $("[data-lang-chevron]", widget);
+    dropdown.classList.remove("opacity-0", "scale-95", "-translate-y-1", "pointer-events-none");
+    toggle.setAttribute("aria-expanded", "true");
+    if (chevron) chevron.style.transform = "rotate(180deg)";
+  }
+
+  function renderLangDropdowns() {
+    langWidgets.forEach((widget) => {
+      const dropdown = $("[data-lang-dropdown]", widget);
+      dropdown.innerHTML = LANGS.filter((l) => l !== currentLang)
+        .map(
+          (l) =>
+            `<button type="button" data-lang-option="${l}" role="option" class="w-full text-left px-4 py-2.5 text-[13.5px] font-semibold text-navy-950 hover:bg-metal-100 hover:text-accent-dark transition-colors duration-150">${LANG_NAME[l]}</button>`
+        )
+        .join("");
+      $$("[data-lang-option]", dropdown).forEach((opt) => {
+        opt.addEventListener("click", () => {
+          setLanguage(opt.getAttribute("data-lang-option"));
+          closeLangDropdowns();
+        });
+      });
+    });
+  }
+
+  langWidgets.forEach((widget) => {
+    const toggle = $("[data-lang-toggle]", widget);
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      if (isOpen) closeLangDropdowns();
+      else openLangDropdown(widget);
+    });
+  });
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("[data-lang-widget]")) closeLangDropdowns();
   });
 
   /* ---------------------------------------------------------
@@ -99,6 +150,7 @@
       closeProductModal();
       closeAiPanel();
       closeCertModal();
+      closeLangDropdowns();
     }
   });
 
