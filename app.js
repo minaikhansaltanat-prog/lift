@@ -5,7 +5,11 @@
   "use strict";
 
   const LANG_KEY = "surapid_lang";
+  const LANGS = ["ru", "kz", "kg"];
+  const LANG_LABEL = { ru: "РУС", kz: "ҚАЗ", kg: "КЫР" };
+  const LANG_HTML_TAG = { ru: "ru", kz: "kk", kg: "ky" };
   let currentLang = localStorage.getItem(LANG_KEY) || "ru";
+  if (!LANGS.includes(currentLang)) currentLang = "ru";
 
   const $ = (sel, ctx) => (ctx || document).querySelector(sel);
   const $$ = (sel, ctx) => Array.from((ctx || document).querySelectorAll(sel));
@@ -31,11 +35,13 @@
     $$("[data-i18n-placeholder]").forEach((el) => {
       el.setAttribute("placeholder", t(el.getAttribute("data-i18n-placeholder"), lang));
     });
+    const nextLang = LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length];
     $$("[data-lang-label]").forEach((el) => {
-      el.textContent = lang === "ru" ? "ҚАЗ" : "РУС";
+      el.textContent = LANG_LABEL[nextLang];
     });
-    document.documentElement.lang = lang === "kz" ? "kk" : "ru";
+    document.documentElement.lang = LANG_HTML_TAG[lang] || "ru";
     document.documentElement.classList.toggle("lang-kz", lang === "kz");
+    document.documentElement.classList.toggle("lang-kg", lang === "kg");
   }
 
   function setLanguage(lang, opts) {
@@ -46,6 +52,7 @@
     renderFooterProducts(lang);
     renderGallery(lang);
     renderReviews(lang);
+    renderVideos(lang);
     if (!(opts && opts.silent)) {
       resetAiChat(lang);
     }
@@ -53,7 +60,8 @@
 
   $$("[data-lang-toggle]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      setLanguage(currentLang === "ru" ? "kz" : "ru");
+      const next = LANGS[(LANGS.indexOf(currentLang) + 1) % LANGS.length];
+      setLanguage(next);
     });
   });
 
@@ -90,6 +98,7 @@
       closeMenu();
       closeProductModal();
       closeAiPanel();
+      closeCertModal();
     }
   });
 
@@ -152,20 +161,22 @@
   const productGrid = $("#product-grid");
   const footerProducts = $("#footer-products");
 
+  const MORE_LABEL = { ru: "Подробнее", kz: "Толығырақ", kg: "Кеӊири" };
+
   function renderProducts(lang) {
     productGrid.innerHTML = PRODUCTS.map(
       (p, i) => `
-      <button type="button" data-reveal data-product-id="${p.id}" class="product-card group text-left bg-white/[0.04] hover:bg-white/[0.07] border border-white/10 rounded-3xl overflow-hidden transition-colors duration-300">
+      <button type="button" data-reveal data-product-id="${p.id}" class="product-card group text-left bg-white hover:bg-metal-50 border border-metal-200 rounded-3xl overflow-hidden shadow-elev-1 hover:shadow-elev-2 transition-all duration-300">
         <div class="aspect-[4/3] overflow-hidden relative">
           <img src="${p.img}" alt="${resolveField(p.title, lang)}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-          <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-950/10 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-navy-950/5 to-transparent"></div>
           <span class="absolute top-3 left-3 text-[10.5px] font-bold tracking-wide bg-accent text-white px-2.5 py-1 rounded-full">${resolveField(p.tag, lang)}</span>
         </div>
         <div class="p-5">
-          <h3 class="font-display font-semibold text-[15.5px] text-white leading-snug">${resolveField(p.title, lang)}</h3>
-          <p class="mt-2 text-[13px] text-metal-400 line-clamp-2">${resolveField(p.desc, lang)}</p>
-          <span class="mt-4 inline-flex items-center gap-1.5 text-[13px] font-bold text-accent-light">
-            ${lang === "kz" ? "Толығырақ" : "Подробнее"}
+          <h3 class="font-display font-semibold text-[15.5px] text-navy-950 leading-snug">${resolveField(p.title, lang)}</h3>
+          <p class="mt-2 text-[13px] text-metal-600 line-clamp-2">${resolveField(p.desc, lang)}</p>
+          <span class="mt-4 inline-flex items-center gap-1.5 text-[13px] font-bold text-accent-dark">
+            ${MORE_LABEL[lang] || MORE_LABEL.ru}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform duration-200"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </span>
         </div>
@@ -211,7 +222,8 @@
       if (typeSelect) typeSelect.selectedIndex = 0;
       const msg = $('textarea[name="message"]');
       if (msg) {
-        const label = currentLang === "kz" ? "Қызығушылық танытқан модель" : "Модель, которая заинтересовала";
+        const labels = { ru: "Модель, которая заинтересовала", kz: "Қызығушылық танытқан модель", kg: "Кызыккан модель" };
+        const label = labels[currentLang] || labels.ru;
         msg.value = `${label}: ${resolveField(p.title, currentLang)}`;
       }
       closeProductModal();
@@ -259,12 +271,12 @@
 
   function reviewCardHTML(item, lang) {
     return `
-      <div class="carousel-item shrink-0 w-[280px] sm:w-[360px] bg-white/[0.05] border border-white/10 rounded-3xl p-6 backdrop-blur">
+      <div class="carousel-item shrink-0 w-[280px] sm:w-[360px] bg-white border border-metal-200 rounded-3xl p-6 shadow-elev-1">
         <svg width="26" height="20" viewBox="0 0 32 24" fill="none" class="text-accent mb-3"><path d="M0 24V13.6C0 6 4.8 1 12.8 0l1.6 3.6C9.2 5.2 6.8 8 6.8 12h6.4v12H0zm18.4 0V13.6C18.4 6 23.2 1 31.2 0l1.6 3.6c-5.2 1.6-7.6 4.4-7.6 8.4h6.4v12H18.4z" fill="currentColor"/></svg>
-        <p class="text-[14px] text-metal-200 leading-relaxed">${resolveField(item.text, lang)}</p>
+        <p class="text-[14px] text-metal-700 leading-relaxed">${resolveField(item.text, lang)}</p>
         <div class="mt-5 flex items-center gap-3">
           <div class="w-9 h-9 rounded-full bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center text-white font-display font-bold text-[13px] shrink-0">${resolveField(item.role, lang).charAt(0)}</div>
-          <p class="text-[12.5px] text-metal-400 font-medium">${resolveField(item.role, lang)}</p>
+          <p class="text-[12.5px] text-metal-500 font-medium">${resolveField(item.role, lang)}</p>
         </div>
       </div>`;
   }
@@ -279,6 +291,65 @@
     reviewsTrack.innerHTML = html + html;
     initCarousel("reviews-viewport", "reviews-track", REVIEWS.length, { speed: 22, dir: -1 });
   }
+
+  /* ---------------------------------------------------------
+     Video showcase (official SURAPID YouTube videos)
+  --------------------------------------------------------- */
+  const videoGrid = $("#video-grid");
+  function renderVideos(lang) {
+    if (!videoGrid) return;
+    videoGrid.innerHTML = VIDEOS.map(
+      (v) => `
+      <div data-reveal class="rounded-3xl overflow-hidden shadow-elev-2 border border-metal-200 bg-navy-950">
+        <div class="aspect-video">
+          <iframe
+            class="w-full h-full"
+            src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1"
+            title="${resolveField(v.title, lang)}"
+            loading="lazy"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p class="px-5 py-4 text-[13.5px] font-semibold text-navy-950 bg-white">${resolveField(v.title, lang)}</p>
+      </div>`
+    ).join("");
+    observeReveals(videoGrid);
+  }
+
+  /* ---------------------------------------------------------
+     Certificate lightbox
+  --------------------------------------------------------- */
+  const certModal = $("#cert-modal");
+  const certModalCard = $("#cert-modal-card");
+  function openCertModal() {
+    certModal.classList.remove("hidden");
+    requestAnimationFrame(() => {
+      certModal.classList.remove("opacity-0");
+      certModal.classList.add("flex");
+      certModalCard.classList.remove("opacity-0", "translate-y-4");
+    });
+    document.documentElement.classList.add("no-scroll");
+    document.body.classList.add("no-scroll");
+  }
+  function closeCertModal() {
+    if (certModal.classList.contains("hidden")) return;
+    certModal.classList.add("opacity-0");
+    certModalCard.classList.add("opacity-0", "translate-y-4");
+    setTimeout(() => {
+      certModal.classList.add("hidden");
+      certModal.classList.remove("flex");
+    }, 260);
+    document.documentElement.classList.remove("no-scroll");
+    document.body.classList.remove("no-scroll");
+  }
+  const certThumb = $("#cert-thumb");
+  const certViewBtn = $("#cert-view-btn");
+  if (certThumb) certThumb.addEventListener("click", openCertModal);
+  if (certViewBtn) certViewBtn.addEventListener("click", openCertModal);
+  $("#cert-modal-close").addEventListener("click", closeCertModal);
+  $("#cert-modal-backdrop").addEventListener("click", closeCertModal);
 
   /* ---------------------------------------------------------
      Infinite draggable carousel engine
