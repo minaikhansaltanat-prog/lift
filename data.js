@@ -129,6 +129,10 @@ const TRANSLATIONS = {
     "cert.download": "Скачать PDF",
     "video.kicker": "Видео",
     "video.title": "Завод и продукция SURAPID в деле",
+
+    "hero.ctaPresentation": "Скачать презентацию",
+    "download.title": "Полный каталог продукции SURAPID — в PDF",
+    "download.subtitle": "50 страниц: все серии лифтов, технические характеристики, о компании",
   },
 
   kz: {
@@ -257,6 +261,10 @@ const TRANSLATIONS = {
     "cert.download": "PDF жүктеп алу",
     "video.kicker": "Видео",
     "video.title": "SURAPID зауыты мен өнімдері іс жүзінде",
+
+    "hero.ctaPresentation": "Презентацияны жүктеп алу",
+    "download.title": "SURAPID толық өнім каталогы — PDF форматында",
+    "download.subtitle": "50 бет: барлық лифт сериялары, техникалық сипаттамалар, компания туралы",
   },
 
   kg: {
@@ -385,6 +393,10 @@ const TRANSLATIONS = {
     "cert.download": "PDF жүктөп алуу",
     "video.kicker": "Видео",
     "video.title": "SURAPID заводу жана продукциясы иш жүзүндө",
+
+    "hero.ctaPresentation": "Презентацияны жүктөп алуу",
+    "download.title": "SURAPID толук продукция каталогу — PDF форматында",
+    "download.subtitle": "50 бет: бардык лифт сериялары, техникалык мүнөздөмөлөр, компания жөнүндө",
   },
 };
 

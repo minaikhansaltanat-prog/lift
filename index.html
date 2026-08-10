@@ -152,6 +152,15 @@
   .fab-ring span:nth-child(2) { animation-delay: .8s; }
   .fab-ring span:nth-child(3) { animation-delay: 1.6s; }
 
+  .pulse-pill { position: absolute; inset: -5px; border-radius: 999px; pointer-events: none; }
+  .pulse-pill span {
+    position: absolute; inset: 0; border-radius: 999px;
+    border: 1.5px solid currentColor;
+    animation: pulseRing 2.4s cubic-bezier(.2,.6,.3,1) infinite;
+  }
+  .pulse-pill span:nth-child(2) { animation-delay: .8s; }
+  .pulse-pill span:nth-child(3) { animation-delay: 1.6s; }
+
   @keyframes floaty { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-6px);} }
   .fab-float { animation: floaty 3.2s ease-in-out infinite; }
 
@@ -310,6 +319,11 @@
       <a href="https://wa.me/77080308888" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/15 border border-white/25 text-white font-bold text-[15px] px-6 py-3.5 rounded-full backdrop-blur transition-all duration-200 hover:-translate-y-0.5">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-wa"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.46 17.5 2 12.04 2zm0 18.13a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.81.83-3.02-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.53 3.69-8.22 8.23-8.22 4.53 0 8.22 3.69 8.22 8.22 0 4.53-3.69 8.22-8.24 8.22z"/></svg>
         <span data-i18n="hero.cta2">WhatsApp-қа жазу</span>
+      </a>
+      <a href="docs/SURAPID-presentation-ru.pdf" download class="relative inline-flex items-center gap-2.5 bg-white hover:bg-metal-50 text-navy-950 font-bold text-[15px] px-6 py-3.5 rounded-full shadow-elev-2 transition-all duration-200 hover:-translate-y-0.5">
+        <span class="pulse-pill text-brass"><span></span><span></span><span></span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="relative text-accent-dark"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span class="relative" data-i18n="hero.ctaPresentation">Скачать презентацию</span>
       </a>
     </div>
   </div>
@@ -761,6 +775,28 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     DOWNLOAD CATALOG BAND
+========================================================= -->
+<section class="relative bg-navy-950 py-12 sm:py-14 overflow-hidden noise">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-7 text-center sm:text-left relative">
+    <div class="flex flex-col sm:flex-row items-center gap-5">
+      <div class="w-14 h-14 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h2"/></svg>
+      </div>
+      <div>
+        <p class="text-white font-display font-semibold text-[18px] sm:text-[20px]" data-i18n="download.title">Полный каталог продукции SURAPID — в PDF</p>
+        <p class="text-metal-400 text-[13.5px] mt-1" data-i18n="download.subtitle">50 страниц: все серии лифтов, технические характеристики, о компании</p>
+      </div>
+    </div>
+    <a href="docs/SURAPID-presentation-ru.pdf" download class="relative shrink-0 inline-flex items-center gap-2.5 bg-white hover:bg-metal-50 text-navy-950 font-bold text-[15px] px-6 py-3.5 rounded-full shadow-elev-2 transition-all duration-200 hover:-translate-y-0.5">
+      <span class="pulse-pill text-brass"><span></span><span></span><span></span></span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="relative text-accent-dark"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      <span class="relative" data-i18n="hero.ctaPresentation">Скачать презентацию</span>
+    </a>
   </div>
 </section>
 
