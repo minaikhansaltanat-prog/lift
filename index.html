@@ -879,10 +879,9 @@
 <!-- =========================================================
      FLOATING ACTION BUTTONS: AI Assistant + WhatsApp
 ========================================================= -->
-<div class="fixed right-4 sm:right-6 bottom-5 sm:bottom-6 z-[60] flex flex-col items-end gap-3.5">
-
-  <!-- AI assistant chat panel -->
-  <div id="ai-panel" class="hidden opacity-0 translate-y-3 w-[calc(100vw-2rem)] max-w-[380px] h-[min(560px,70vh)] bg-white rounded-[24px] shadow-elev-3 border border-metal-200 flex flex-col overflow-hidden mb-1">
+<!-- AI assistant chat panel: positioned independently of the button stack below so its
+     height never compounds with the buttons' height and pushes above the header -->
+<div id="ai-panel" class="hidden opacity-0 translate-y-3 fixed right-4 sm:right-6 bottom-24 sm:bottom-28 z-[60] w-[calc(100vw-2rem)] max-w-[380px] h-[min(560px,calc(100dvh-var(--header-h)-108px))] bg-white rounded-[24px] shadow-elev-3 border border-metal-200 overflow-hidden">
     <div class="bg-navy-950 px-5 py-4 flex items-center gap-3 shrink-0 noise relative">
       <div class="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-accent-dark flex items-center justify-center relative shrink-0">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2M20 14h2M9 13v2M15 13v2"/></svg>
@@ -907,8 +906,9 @@
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
       </button>
     </form>
-  </div>
+</div>
 
+<div class="fixed right-4 sm:right-6 bottom-5 sm:bottom-6 z-[60] flex flex-col items-end gap-3.5">
   <!-- AI assistant toggle button -->
   <button type="button" id="ai-toggle" class="relative w-16 h-16 rounded-full bg-navy-950 shadow-elev-3 flex items-center justify-center text-white fab-float" aria-label="AI-көмекші">
     <span class="fab-ring text-accent"><span></span><span></span><span></span></span>
