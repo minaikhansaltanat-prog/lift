@@ -130,7 +130,11 @@
     -webkit-overflow-scrolling: touch;
   }
   .menu-open-state #mobile-panel { transform: translateX(0); }
-  html.no-scroll, body.no-scroll { overflow: hidden !important; height: 100%; }
+  /* Scroll lock: position:fixed (not just overflow:hidden) so the page keeps
+     its scroll offset instead of snapping to the top when unlocked. The
+     top offset is set inline by JS to the negative of the saved scrollY. */
+  html.no-scroll { overflow: hidden; }
+  body.no-scroll { position: fixed; left: 0; right: 0; overflow: hidden; }
 
   /* ---- carousels ---- */
   .carousel-viewport { overflow: hidden; touch-action: pan-y; cursor: grab; -webkit-user-select: none; user-select: none; }

@@ -15,6 +15,30 @@
   const $ = (sel, ctx) => (ctx || document).querySelector(sel);
   const $$ = (sel, ctx) => Array.from((ctx || document).querySelectorAll(sel));
 
+  /* ---------------------------------------------------------
+     Scroll lock (mobile menu, product modal, cert modal)
+     Uses position:fixed + saved scrollY instead of plain
+     overflow:hidden, which loses the scroll position and snaps
+     the page back to the top when unlocked.
+  --------------------------------------------------------- */
+  let savedScrollY = 0;
+  function lockScroll() {
+    savedScrollY = window.scrollY;
+    document.body.style.top = `-${savedScrollY}px`;
+    document.documentElement.classList.add("no-scroll");
+    document.body.classList.add("no-scroll");
+  }
+  function unlockScroll() {
+    document.documentElement.classList.remove("no-scroll");
+    document.body.classList.remove("no-scroll");
+    document.body.style.top = "";
+    // behavior: "instant" — the site has global CSS scroll-behavior: smooth,
+    // which would otherwise animate this restoration and risk it getting
+    // interrupted or read mid-flight instead of landing exactly back where
+    // the user was.
+    window.scrollTo({ top: savedScrollY, left: 0, behavior: "instant" });
+  }
+
   function t(key, lang) {
     const dict = TRANSLATIONS[lang || currentLang];
     return (dict && dict[key]) || key;
@@ -124,16 +148,17 @@
   const mobileBackdrop = $("#mobile-backdrop");
 
   function openMenu() {
-    document.documentElement.classList.add("menu-open-state", "no-scroll");
-    document.body.classList.add("no-scroll");
+    document.documentElement.classList.add("menu-open-state");
+    lockScroll();
     burgerBtn.classList.add("menu-open");
     burgerBtn.setAttribute("aria-expanded", "true");
     mobileBackdrop.classList.remove("pointer-events-none");
     mobileBackdrop.classList.add("opacity-100");
   }
   function closeMenu() {
-    document.documentElement.classList.remove("menu-open-state", "no-scroll");
-    document.body.classList.remove("no-scroll");
+    if (!document.documentElement.classList.contains("menu-open-state")) return;
+    document.documentElement.classList.remove("menu-open-state");
+    unlockScroll();
     burgerBtn.classList.remove("menu-open");
     burgerBtn.setAttribute("aria-expanded", "false");
     mobileBackdrop.classList.add("pointer-events-none");
@@ -285,8 +310,7 @@
       productModal.classList.add("flex");
       productModalCard.classList.remove("opacity-0", "translate-y-4");
     });
-    document.documentElement.classList.add("no-scroll");
-    document.body.classList.add("no-scroll");
+    lockScroll();
   }
   function closeProductModal() {
     if (productModal.classList.contains("hidden")) return;
@@ -296,8 +320,7 @@
       productModal.classList.add("hidden");
       productModal.classList.remove("flex");
     }, 260);
-    document.documentElement.classList.remove("no-scroll");
-    document.body.classList.remove("no-scroll");
+    unlockScroll();
   }
   $("#product-modal-close").addEventListener("click", closeProductModal);
   $("#product-modal-backdrop").addEventListener("click", closeProductModal);
@@ -441,8 +464,7 @@
       certModal.classList.add("flex");
       certModalCard.classList.remove("opacity-0", "translate-y-4");
     });
-    document.documentElement.classList.add("no-scroll");
-    document.body.classList.add("no-scroll");
+    lockScroll();
   }
   function closeCertModal() {
     if (certModal.classList.contains("hidden")) return;
@@ -452,8 +474,7 @@
       certModal.classList.add("hidden");
       certModal.classList.remove("flex");
     }, 260);
-    document.documentElement.classList.remove("no-scroll");
-    document.body.classList.remove("no-scroll");
+    unlockScroll();
   }
   const certThumb = $("#cert-thumb");
   const certViewBtn = $("#cert-view-btn");
