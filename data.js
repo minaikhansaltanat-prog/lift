@@ -961,3 +961,31 @@ const VIDEOS = [
     },
   },
 ];
+
+/* =========================================================
+   Full-screen intro carousel (top of homepage, below header)
+========================================================= */
+const INTRO_SLIDES = [
+  "Photo/intro/01.jpg",
+  "Photo/intro/02.jpg",
+  "Photo/intro/03.jpg",
+  "Photo/intro/04.jpg",
+  "Photo/intro/05.jpg",
+  "Photo/intro/06.jpg",
+  "Photo/intro/07.jpg",
+  "Photo/intro/08.jpg",
+  "Photo/intro/09.jpg",
+  "Photo/intro/10.jpg",
+  "Photo/intro/11.jpg",
+  "Photo/intro/12.jpg",
+  "Photo/intro/13.jpg",
+  "Photo/intro/14.jpg",
+  "Photo/intro/15.jpg",
+  "Photo/intro/16.jpg",
+  "Photo/intro/17.jpg",
+  "Photo/intro/18.jpg",
+  "Photo/intro/19.jpg",
+];
+
+// Mobile-only: shown first, portrait shots, before INTRO_SLIDES continues
+const INTRO_SLIDES_MOBILE_FIRST = ["Photo/intro/mobile-1.jpeg", "Photo/intro/mobile-2.jpeg"];

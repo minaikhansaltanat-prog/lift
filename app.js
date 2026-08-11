@@ -345,6 +345,35 @@
   }
 
   /* ---------------------------------------------------------
+     Intro full-screen photo carousel (top of homepage)
+  --------------------------------------------------------- */
+  const introTrack = $("#intro-track");
+  const introMobileQuery = window.matchMedia("(max-width: 767px)");
+  let introIsMobile = null;
+
+  function introSlideHTML(src, eager) {
+    return `<div class="carousel-item shrink-0 grow-0 basis-full w-full h-full"><img src="${src}" alt="" loading="${eager ? "eager" : "lazy"}" fetchpriority="${eager ? "high" : "low"}" class="w-full h-full object-cover" /></div>`;
+  }
+
+  function renderIntroCarousel() {
+    if (!introTrack) return;
+    const isMobile = introMobileQuery.matches;
+    introIsMobile = isMobile;
+    const slides = isMobile ? [...INTRO_SLIDES_MOBILE_FIRST, ...INTRO_SLIDES] : INTRO_SLIDES;
+    // Only the first couple of slides (immediately visible / next-up) load eagerly;
+    // the rest of the set and the whole cloned duplicate (used for seamless looping)
+    // load lazily so the page doesn't stall fetching ~20 full-size photos at once.
+    const primary = slides.map((src, i) => introSlideHTML(src, i < 2)).join("");
+    const clone = slides.map((src) => introSlideHTML(src, false)).join("");
+    introTrack.innerHTML = primary + clone;
+    initCarousel("intro-viewport", "intro-track", slides.length, { speed: 90, dir: 1 });
+  }
+
+  introMobileQuery.addEventListener("change", () => {
+    if (introMobileQuery.matches !== introIsMobile) renderIntroCarousel();
+  });
+
+  /* ---------------------------------------------------------
      Video showcase (official SURAPID YouTube videos)
   --------------------------------------------------------- */
   const videoGrid = $("#video-grid");
@@ -705,6 +734,7 @@
      Init
   --------------------------------------------------------- */
   setLanguage(currentLang, { silent: true });
+  renderIntroCarousel();
   observeReveals(document);
   aiMessages.dataset.greeted = "";
 
