@@ -351,8 +351,14 @@
   const introMobileQuery = window.matchMedia("(max-width: 767px)");
   let introIsMobile = null;
 
-  function introSlideHTML(src, eager) {
-    return `<div class="carousel-item shrink-0 grow-0 basis-full w-full h-full"><img src="${src}" alt="" loading="${eager ? "eager" : "lazy"}" fetchpriority="${eager ? "high" : "low"}" class="w-full h-full object-cover" /></div>`;
+  function introSlideHTML(src, priority) {
+    // Note: deliberately NOT using loading="lazy" here. Native lazy-loading is
+    // known to be unreliable on some mobile browsers for images inside an
+    // ancestor that gets CSS transform: translateX() applied (the carousel
+    // track) — the intersection check can miss the transformed position and
+    // the image never loads. All slides load eagerly; fetchpriority just
+    // schedules the rest behind the first couple.
+    return `<div class="carousel-item shrink-0 grow-0 basis-full w-full h-full"><img src="${src}" alt="" fetchpriority="${priority}" class="w-full h-full object-cover" /></div>`;
   }
 
   function renderIntroCarousel() {
@@ -360,11 +366,8 @@
     const isMobile = introMobileQuery.matches;
     introIsMobile = isMobile;
     const slides = isMobile ? [...INTRO_SLIDES_MOBILE_FIRST, ...INTRO_SLIDES] : INTRO_SLIDES;
-    // Only the first couple of slides (immediately visible / next-up) load eagerly;
-    // the rest of the set and the whole cloned duplicate (used for seamless looping)
-    // load lazily so the page doesn't stall fetching ~20 full-size photos at once.
-    const primary = slides.map((src, i) => introSlideHTML(src, i < 2)).join("");
-    const clone = slides.map((src) => introSlideHTML(src, false)).join("");
+    const primary = slides.map((src, i) => introSlideHTML(src, i < 2 ? "high" : "auto")).join("");
+    const clone = slides.map((src) => introSlideHTML(src, "low")).join("");
     introTrack.innerHTML = primary + clone;
     initCarousel("intro-viewport", "intro-track", slides.length, { speed: 90, dir: 1 });
   }

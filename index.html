@@ -202,6 +202,13 @@
   }
 
   .lang-kz { font-feature-settings: "kern" 1; }
+
+  /* #home uses h-screen (100vh) as a universally-supported base; dvh is applied
+     only as a progressive enhancement so older/embedded mobile browsers that
+     don't understand dvh still get a correctly-sized, non-collapsed section. */
+  @supports (height: 100dvh) {
+    #home { height: 100dvh; }
+  }
 </style>
 </head>
 
@@ -290,7 +297,7 @@
 <!-- =========================================================
      INTRO PHOTO CAROUSEL — full-screen, no text, right below header
 ========================================================= -->
-<section id="intro-carousel" class="relative w-full h-[100dvh] bg-navy-950 overflow-hidden">
+<section id="home" class="relative w-full h-screen bg-navy-950 overflow-hidden">
   <div class="carousel-viewport w-full h-full" id="intro-viewport">
     <div class="carousel-track h-full" id="intro-track"></div>
   </div>
@@ -306,7 +313,7 @@
 <!-- =========================================================
      HERO
 ========================================================= -->
-<section id="home" class="relative min-h-[620px] sm:min-h-[720px] lg:min-h-screen flex items-center bg-navy-950">
+<section id="hero" class="relative min-h-[620px] sm:min-h-[720px] lg:min-h-screen flex items-center bg-navy-950">
   <div class="absolute inset-0">
     <img src="Photo/net/65114c7b1c9db.jpg" alt="SURAPID зауыты" class="w-full h-full object-cover opacity-70" />
     <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/70 to-navy-950/20"></div>
