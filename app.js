@@ -634,6 +634,7 @@
   const aiSuggestions = $("#ai-suggestions");
   const aiIconChat = $("#ai-icon-chat");
   const aiIconClose = $("#ai-icon-close");
+  const fabStack = $("#fab-stack");
 
   let aiOpen = false;
 
@@ -647,6 +648,14 @@
     aiIconChat.classList.add("hidden");
     aiIconClose.classList.remove("hidden");
     aiToggle.setAttribute("aria-expanded", "true");
+    // Hide the floating toggle/WhatsApp buttons while the chat is open: on
+    // mobile, once the on-screen keyboard opens, the fixed-position toggle
+    // button (showing as ✕) can end up sitting on top of the chat's own
+    // send button, making it unreachable. The panel's own header ✕ already
+    // closes the chat, so this button is redundant while open anyway.
+    if (fabStack) {
+      fabStack.classList.add("opacity-0", "pointer-events-none");
+    }
     if (!aiMessages.dataset.greeted) {
       resetAiChat(currentLang);
     }
@@ -662,6 +671,9 @@
     }, 250);
     aiIconChat.classList.remove("hidden");
     aiIconClose.classList.add("hidden");
+    if (fabStack) {
+      fabStack.classList.remove("opacity-0", "pointer-events-none");
+    }
     aiToggle.setAttribute("aria-expanded", "false");
   }
   aiToggle.addEventListener("click", () => (aiOpen ? closeAiPanel() : openAiPanel()));
