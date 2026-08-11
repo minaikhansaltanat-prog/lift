@@ -912,4 +912,52 @@ const VIDEOS = [
       kg: "SURAPID пассажирдик лифт системасы",
     },
   },
+  {
+    id: "8LOGv2IyYO8",
+    title: {
+      ru: "New Xi'ao Elevator Group — №1 лифтовая группа Китая",
+      kz: "New Xi'ao Elevator Group — Қытайдағы №1 лифт тобы",
+      kg: "New Xi'ao Elevator Group — Кытайдагы №1 лифт тобу",
+    },
+  },
+  {
+    id: "rmuRotKBkL4",
+    title: {
+      ru: "Кабина SURAPID S1",
+      kz: "SURAPID S1 кабинасы",
+      kg: "SURAPID S1 кабинасы",
+    },
+  },
+  {
+    id: "y8pyVkWxWh8",
+    title: {
+      ru: "О компании SURAPID Elevator",
+      kz: "SURAPID Elevator компаниясы туралы",
+      kg: "SURAPID Elevator компаниясы жөнүндө",
+    },
+  },
+  {
+    id: "km2CycRlw5Q",
+    title: {
+      ru: "Экскурсия по заводу SURAPID",
+      kz: "SURAPID зауытына экскурсия",
+      kg: "SURAPID заводуна экскурсия",
+    },
+  },
+  {
+    id: "RfEgFQIZVTs",
+    title: {
+      ru: "Производственные линии SURAPID",
+      kz: "SURAPID өндірістік желілері",
+      kg: "SURAPID өндүрүш линиялары",
+    },
+  },
+  {
+    id: "D2qg1OytBXM",
+    title: {
+      ru: "Зона отгрузки завода SURAPID",
+      kz: "SURAPID зауытының жөнелту аймағы",
+      kg: "SURAPID заводунун жөнөтүү аймагы",
+    },
+  },
 ];

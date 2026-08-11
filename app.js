@@ -351,22 +351,34 @@
   function renderVideos(lang) {
     if (!videoGrid) return;
     videoGrid.innerHTML = VIDEOS.map(
-      (v) => `
+      (v, i) => `
       <div data-reveal class="rounded-3xl overflow-hidden shadow-elev-2 border border-metal-200 bg-navy-950">
-        <div class="aspect-video">
-          <iframe
-            class="w-full h-full"
-            src="https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1"
-            title="${resolveField(v.title, lang)}"
-            loading="lazy"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
+        <button type="button" class="video-facade block w-full aspect-video relative group" data-video-id="${v.id}" data-video-title="${resolveField(v.title, lang)}" aria-label="${resolveField(v.title, lang)}">
+          <img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover" />
+          <span class="absolute inset-0 bg-navy-950/25 group-hover:bg-navy-950/10 transition-colors duration-200"></span>
+          <span class="absolute inset-0 flex items-center justify-center">
+            <span class="w-14 h-14 rounded-full bg-white/95 group-hover:bg-white group-hover:scale-110 flex items-center justify-center shadow-elev-2 transition-all duration-200">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#E0550C"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </span>
+        </button>
         <p class="px-5 py-4 text-[13.5px] font-semibold text-navy-950 bg-white">${resolveField(v.title, lang)}</p>
       </div>`
     ).join("");
+    $$(".video-facade", videoGrid).forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-video-id");
+        const title = btn.getAttribute("data-video-title");
+        const iframe = document.createElement("iframe");
+        iframe.className = "w-full h-full";
+        iframe.src = `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&autoplay=1`;
+        iframe.title = title;
+        iframe.frameBorder = "0";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+        btn.replaceWith(iframe);
+      });
+    });
     observeReveals(videoGrid);
   }
 
