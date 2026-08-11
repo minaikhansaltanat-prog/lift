@@ -219,13 +219,12 @@
     productGrid.innerHTML = PRODUCTS.map(
       (p, i) => `
       <button type="button" data-reveal data-product-id="${p.id}" class="product-card group text-left bg-white hover:bg-metal-50 border border-metal-200 rounded-3xl overflow-hidden shadow-elev-1 hover:shadow-elev-2 transition-all duration-300">
-        <div class="aspect-[4/3] overflow-hidden relative">
-          <img src="${p.img}" alt="${resolveField(p.title, lang)}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-          <div class="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-navy-950/5 to-transparent"></div>
-          <span class="absolute top-3 left-3 text-[10.5px] font-bold tracking-wide bg-accent text-white px-2.5 py-1 rounded-full">${resolveField(p.tag, lang)}</span>
+        <div class="h-64 sm:h-72 bg-metal-50 border-b border-metal-100 flex items-center justify-center p-6 overflow-hidden">
+          <img src="${p.img}" alt="${resolveField(p.title, lang)}" loading="lazy" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
         </div>
         <div class="p-5">
-          <h3 class="font-display font-semibold text-[15.5px] text-navy-950 leading-snug">${resolveField(p.title, lang)}</h3>
+          <span class="text-[10.5px] font-bold tracking-wide text-accent-dark uppercase">${resolveField(p.tag, lang)}</span>
+          <h3 class="mt-1.5 font-display font-semibold text-[15.5px] text-navy-950 leading-snug">${resolveField(p.title, lang)}</h3>
           <p class="mt-2 text-[13px] text-metal-600 line-clamp-2">${resolveField(p.desc, lang)}</p>
           <span class="mt-4 inline-flex items-center gap-1.5 text-[13px] font-bold text-accent-dark">
             ${MORE_LABEL[lang] || MORE_LABEL.ru}

@@ -74,6 +74,7 @@ const TRANSLATIONS = {
     "products.title": "Решение для любого объекта",
     "products.subtitle": "От пассажирских, панорамных и коттеджных лифтов до эскалаторов и компонентов.",
     "products.modalCta": "Запросить цену по этой модели",
+    "products.downloadCatalog": "Скачать каталог",
 
     "gallery.kicker": "Галерея",
     "gallery.title": "Производство, шоурум и дизайны кабин",
@@ -206,6 +207,7 @@ const TRANSLATIONS = {
     "products.title": "Әр объектіге лайықталған шешім",
     "products.subtitle": "Пассажирлік, панорамалық, коттедждік лифттерден бастап эскалатор мен компоненттерге дейін.",
     "products.modalCta": "Осы модель бойынша баға сұрату",
+    "products.downloadCatalog": "Каталогты жүктеп алу",
 
     "gallery.kicker": "Галерея",
     "gallery.title": "Өндіріс, көрме залы және кабина дизайндары",
@@ -338,6 +340,7 @@ const TRANSLATIONS = {
     "products.title": "Ар бир объектиге ылайыкташтырылган чечим",
     "products.subtitle": "Пассажирдик, панорамалык, коттедждик лифттерден баштап эскалатор жана компоненттерге чейин.",
     "products.modalCta": "Ушул модель боюнча баа сурап алуу",
+    "products.downloadCatalog": "Каталогту жүктөп алуу",
 
     "gallery.kicker": "Галерея",
     "gallery.title": "Өндүрүш, шоурум жана кабина дизайндары",
@@ -406,7 +409,7 @@ const TRANSLATIONS = {
 const PRODUCTS = [
   {
     id: "passenger",
-    img: "Photo/473599831_1682244062328151_1103103637755167029_n.jpg",
+    img: "Photo/catalog/passenger.jpg",
     title: { ru: "Пассажирские лифты", kz: "Пассажирлік лифттер", kg: "Пассажирдик лифттер" },
     tag: { ru: "SJ-Victor серия", kz: "SJ-Victor сериясы", kg: "SJ-Victor сериясы" },
     desc: {
@@ -425,7 +428,7 @@ const PRODUCTS = [
   },
   {
     id: "panoramic",
-    img: "Photo/473589255_1682244045661486_3343171196765757075_n.jpg",
+    img: "Photo/catalog/panoramic.jpg",
     title: { ru: "Панорамные лифты", kz: "Панорамалық лифттер", kg: "Панорамалык лифттер" },
     tag: { ru: "Обзорная кабина", kz: "Обзорлы кабина", kg: "Айланасы көрүнгөн кабина" },
     desc: {
@@ -444,7 +447,7 @@ const PRODUCTS = [
   },
   {
     id: "home",
-    img: "Photo/473573417_1682244035661487_3410547325526362133_n.jpg",
+    img: "Photo/catalog/home-lift.jpg",
     title: { ru: "Коттеджные лифты", kz: "Коттедждік лифттер", kg: "Коттеждик лифттер" },
     tag: { ru: "Home Lift", kz: "Home Lift", kg: "Home Lift" },
     desc: {
@@ -497,7 +500,7 @@ const PRODUCTS = [
   },
   {
     id: "escalator",
-    img: "Photo/473443458_1682244058994818_6228063287125523383_n.jpg",
+    img: "Photo/catalog/escalator.jpg",
     title: { ru: "Эскалаторы", kz: "Эскалаторлар", kg: "Эскалаторлор" },
     tag: { ru: "Для ТРЦ и метро", kz: "ТРЦ мен метроға", kg: "СБО жана метрого" },
     desc: {
