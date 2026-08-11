@@ -890,6 +890,7 @@ const CERTIFICATE = {
 const VIDEOS = [
   {
     id: "J1W02eEHF30",
+    cover: "Photo/intro/05.jpg",
     title: {
       ru: "Знакомство с SURAPID Elevator",
       kz: "SURAPID Elevator-мен танысу",
@@ -898,6 +899,7 @@ const VIDEOS = [
   },
   {
     id: "p92umGyNAuM",
+    cover: "Photo/intro/01.jpg",
     title: {
       ru: "Добро пожаловать на завод SURAPID",
       kz: "SURAPID зауытына қош келдіңіз",
@@ -906,6 +908,7 @@ const VIDEOS = [
   },
   {
     id: "ajIIYjJgvtI",
+    cover: "Photo/intro/12.jpg",
     title: {
       ru: "Система пассажирских лифтов SURAPID",
       kz: "SURAPID пассажирлік лифт жүйесі",
@@ -914,6 +917,7 @@ const VIDEOS = [
   },
   {
     id: "8LOGv2IyYO8",
+    cover: "Photo/intro/03.jpg",
     title: {
       ru: "New Xi'ao Elevator Group — №1 лифтовая группа Китая",
       kz: "New Xi'ao Elevator Group — Қытайдағы №1 лифт тобы",
@@ -922,6 +926,7 @@ const VIDEOS = [
   },
   {
     id: "rmuRotKBkL4",
+    cover: "Photo/intro/13.jpg",
     title: {
       ru: "Кабина SURAPID S1",
       kz: "SURAPID S1 кабинасы",
@@ -930,6 +935,7 @@ const VIDEOS = [
   },
   {
     id: "y8pyVkWxWh8",
+    cover: "Photo/intro/18.jpg",
     title: {
       ru: "О компании SURAPID Elevator",
       kz: "SURAPID Elevator компаниясы туралы",
@@ -938,6 +944,7 @@ const VIDEOS = [
   },
   {
     id: "km2CycRlw5Q",
+    cover: "Photo/intro/02.jpg",
     title: {
       ru: "Экскурсия по заводу SURAPID",
       kz: "SURAPID зауытына экскурсия",
@@ -946,6 +953,7 @@ const VIDEOS = [
   },
   {
     id: "RfEgFQIZVTs",
+    cover: "Photo/intro/15.jpg",
     title: {
       ru: "Производственные линии SURAPID",
       kz: "SURAPID өндірістік желілері",
@@ -954,6 +962,7 @@ const VIDEOS = [
   },
   {
     id: "D2qg1OytBXM",
+    cover: "Photo/intro/04.jpg",
     title: {
       ru: "Зона отгрузки завода SURAPID",
       kz: "SURAPID зауытының жөнелту аймағы",

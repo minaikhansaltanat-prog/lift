@@ -383,11 +383,15 @@
   function renderVideos(lang) {
     if (!videoGrid) return;
     videoGrid.innerHTML = VIDEOS.map(
-      (v, i) => `
-      <div data-reveal class="rounded-3xl overflow-hidden shadow-elev-2 border border-metal-200 bg-navy-950">
-        <button type="button" class="video-facade block w-full aspect-video relative group" data-video-id="${v.id}" data-video-title="${resolveField(v.title, lang)}" aria-label="${resolveField(v.title, lang)}">
-          <img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="" loading="lazy" class="w-full h-full object-cover" />
-          <span class="absolute inset-0 bg-navy-950/25 group-hover:bg-navy-950/10 transition-colors duration-200"></span>
+      (v) => `
+      <div data-reveal class="group rounded-3xl overflow-hidden shadow-elev-2 border border-metal-200 bg-navy-950">
+        <button type="button" class="video-facade block w-full aspect-video relative overflow-hidden" data-video-id="${v.id}" data-video-title="${resolveField(v.title, lang)}" aria-label="${resolveField(v.title, lang)}">
+          <img src="${v.cover}" alt="" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <span class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-950/15 to-navy-950/5 group-hover:from-navy-950/65 transition-colors duration-300"></span>
+          <span class="absolute top-3.5 left-3.5 flex items-center gap-1.5 bg-white/15 border border-white/25 backdrop-blur-md rounded-full pl-2 pr-3 py-1">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            <span class="text-white text-[10.5px] font-bold tracking-wide">VIDEO</span>
+          </span>
           <span class="absolute inset-0 flex items-center justify-center">
             <span class="w-14 h-14 rounded-full bg-white/95 group-hover:bg-white group-hover:scale-110 flex items-center justify-center shadow-elev-2 transition-all duration-200">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="#E0550C"><path d="M8 5v14l11-7z"/></svg>
