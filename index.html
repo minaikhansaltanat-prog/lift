@@ -751,13 +751,20 @@
           </div>
         </div>
 
-        <div data-reveal class="mt-8 rounded-2xl overflow-hidden border border-metal-200 aspect-[16/10] bg-metal-200 relative">
-          <!-- Map placeholder: replace with Google Maps embed (Almaty office) once exact address is confirmed -->
-          <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 text-metal-500">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span class="text-[13px] font-medium" data-i18n="contact.mapPlaceholder">Google Maps — Алматы офисі</span>
+        <a href="https://2gis.kz/almaty/search/%D0%91%D0%A6%20%D0%9D%D1%83%D1%80%D0%BB%D1%8B%20%D0%A2%D0%B0%D1%83%2C%20%D0%91%D0%BB%D0%BE%D0%BA%202%D0%91/geo/9430047375172010/76.945641%2C43.229347?m=76.945666%2C43.22937%2F17.35" target="_blank" rel="noopener" data-reveal class="group relative mt-8 block rounded-2xl overflow-hidden border border-metal-200 aspect-[16/10] shadow-elev-1 hover:shadow-elev-2 transition-shadow duration-300">
+          <div class="absolute inset-0" style="background: radial-gradient(circle at 28% 18%, #17C767 0%, #0BA24A 45%, #067A38 100%);"></div>
+          <div class="absolute inset-0 opacity-[0.14]" style="background-image: radial-gradient(circle, #fff 1.5px, transparent 1.5px); background-size: 24px 24px;"></div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center px-6">
+            <span class="w-14 h-14 rounded-full bg-white/20 border border-white/30 backdrop-blur flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+            </span>
+            <p class="text-white font-display font-semibold text-[15px] max-w-[220px]" data-i18n="contact.office">г. Алматы, БЦ «Нурлы Тау», Блок 2Б</p>
+            <span class="inline-flex items-center gap-1.5 bg-white group-hover:bg-white/90 text-[#067A38] text-[13px] font-bold px-4 py-2 rounded-full transition-colors duration-200">
+              <span data-i18n="contact.mapOpen">Открыть на 2GIS</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </span>
           </div>
-        </div>
+        </a>
       </div>
 
       <div data-reveal class="lg:col-span-3 bg-white rounded-[28px] p-6 sm:p-9 shadow-elev-2 border border-metal-200">
@@ -863,6 +870,7 @@
           <li><a href="tel:+77080308888" class="hover:text-accent-dark transition-colors">+7 708 030 8888</a></li>
           <li><a href="https://wa.me/77080308888" target="_blank" rel="noopener" class="hover:text-accent-dark transition-colors">WhatsApp</a></li>
           <li data-i18n="contact.office">Алматы қ., ресми өкілдік офисі</li>
+          <li data-i18n="footer.director">Директор: Жетписбай Т.</li>
         </ul>
       </div>
     </div>

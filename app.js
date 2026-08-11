@@ -368,7 +368,8 @@
     const primary = slides.map((src, i) => introSlideHTML(src, i < 2 ? "high" : "auto")).join("");
     const clone = slides.map((src) => introSlideHTML(src, "low")).join("");
     introTrack.innerHTML = primary + clone;
-    initCarousel("intro-viewport", "intro-track", slides.length, { speed: 90, dir: 1 });
+    // autoplay disabled: this carousel only moves via drag/swipe or the arrow buttons
+    initCarousel("intro-viewport", "intro-track", slides.length, { dir: 1, autoplay: false });
   }
 
   introMobileQuery.addEventListener("change", () => {
@@ -476,6 +477,7 @@
       raf: null,
       dir: opts.dir || 1,
       speed: opts.speed || 30,
+      autoplay: opts.autoplay !== false,
     };
 
     function measure() {
@@ -507,7 +509,7 @@
             state.pos = state.targetPos;
             state.targetPos = null;
           }
-        } else if (!state.hovering) {
+        } else if (state.autoplay && !state.hovering) {
           state.pos -= state.speed * dt * state.dir;
         }
       }
