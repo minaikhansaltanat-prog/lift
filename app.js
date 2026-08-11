@@ -357,7 +357,18 @@
     // track) — the intersection check can miss the transformed position and
     // the image never loads. All slides load eagerly; fetchpriority just
     // schedules the rest behind the first couple.
-    return `<div class="carousel-item shrink-0 grow-0 basis-full w-full h-full"><img src="${src}" alt="" fetchpriority="${priority}" class="w-full h-full object-cover" /></div>`;
+    //
+    // Each slide layers two copies of the same (browser-cached, so no extra
+    // network cost) image: a blurred, scaled-up backdrop that fills the full
+    // screen edge-to-edge, and the real photo on top sized with object-contain
+    // so it is never cropped — the classic "blurred letterbox" treatment used
+    // for photos whose aspect ratio doesn't match the viewport (portrait phone
+    // screens showing landscape factory photos, etc).
+    return `
+      <div class="carousel-item shrink-0 grow-0 basis-full w-full h-full relative overflow-hidden bg-navy-950">
+        <img src="${src}" alt="" fetchpriority="${priority}" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-60" />
+        <img src="${src}" alt="" fetchpriority="${priority}" class="relative w-full h-full object-contain" />
+      </div>`;
   }
 
   function renderIntroCarousel() {
