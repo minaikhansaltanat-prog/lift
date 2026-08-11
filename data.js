@@ -471,7 +471,7 @@ const PRODUCTS = [
   },
   {
     id: "hospital",
-    img: "Photo/473416949_1682244105661480_609811887345847479_n.jpg",
+    img: "Photo/catalog/hospital.jpg",
     title: { ru: "Больничные лифты", kz: "Ауруханалық лифттер", kg: "Ооруканалык лифттер" },
     tag: { ru: "Медицинский стандарт", kz: "Медициналық стандарт", kg: "Медициналык стандарт" },
     desc: {
@@ -489,7 +489,7 @@ const PRODUCTS = [
   },
   {
     id: "cargo",
-    img: "Photo/473570086_1682244048994819_8646457636486323575_n.jpg",
+    img: "Photo/catalog/cargo.jpg",
     title: { ru: "Грузовые лифты", kz: "Жүк лифттері", kg: "Жүк лифттери" },
     tag: { ru: "Cargo Lift", kz: "Cargo Lift", kg: "Cargo Lift" },
     desc: {
@@ -523,7 +523,7 @@ const PRODUCTS = [
   },
   {
     id: "travolator",
-    img: "Photo/473778154_1682244162328141_6677850465353160176_n.jpg",
+    img: "Photo/catalog/travolator.jpg",
     title: { ru: "Траволаторы", kz: "Траволаторлар", kg: "Траволаторлор" },
     tag: { ru: "Пассажирские конвейеры", kz: "Жылжымалы жолдар", kg: "Жүргүнчү тасмалары" },
     desc: {
